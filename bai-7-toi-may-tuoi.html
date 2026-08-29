@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bài 7 · 我五岁 — Tiếng Trung Hà Nam Ninh</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hanzi-writer/3.5.0/hanzi-writer.min.js"></script>
+<style>
+:root{
+  --main:#e0559a;--main-d:#b83b78;--soft:#fbdcec;--bg:#fff5fa;--ink:#3a2430;--muted:#8d6b7c;
+  --line:#f5c3dd;--green:#22a06b;--red:#e14b3c;--yellow:#f6b73c;--blue:#3273c4;--teal:#0d9488;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"Segoe UI","Microsoft YaHei",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{background:linear-gradient(135deg,#e0559a,#f6b73c);color:#fff;padding:18px 14px;text-align:center}
+header h1{margin:0;font-size:28px;letter-spacing:3px}
+header p{margin:4px 0 0;font-size:14px;opacity:.95}
+.starbar{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--main-d);font-weight:800;
+  border-radius:999px;padding:5px 14px;margin-top:8px;font-size:15px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.wrap{max-width:900px;margin:0 auto;padding:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:9}
+.tab{flex:1;min-width:112px;padding:10px 6px;border:none;border-radius:12px;background:#fff;color:var(--muted);
+  font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.09)}
+.tab.active{background:var(--main);color:#fff}
+.panel{display:none}.panel.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:#fff;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 2px 10px rgba(190,70,130,.12)}
+.btn{border:none;border-radius:12px;padding:11px 18px;font-weight:800;cursor:pointer;background:var(--main);color:#fff;font-size:15px}
+.btn.ghost{background:#fff;color:var(--main);border:2px solid var(--line)}
+.btn.big{font-size:18px;padding:14px 26px}
+.btn:active{transform:scale(.97)}
+.sound{font-size:24px;background:none;border:none;cursor:pointer;color:var(--main);padding:2px 6px}
+.hint{font-size:13px;color:var(--muted)}
+h2.sec{margin:6px 0 6px;font-size:19px;color:var(--main-d)}
+h3.sub{margin:12px 0 6px;font-size:15px;color:var(--teal)}
+.teach{background:#fffbe9;border-left:5px solid var(--yellow);border-radius:10px;padding:10px 12px;font-size:13.5px;color:#6b5433;margin:10px 0}
+.teach b{color:var(--main-d)}
+.fb{font-weight:800;font-size:15px;margin-top:8px;min-height:22px}
+.fb.ok{color:var(--green)}.fb.no{color:var(--red)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+/* mẫu câu */
+.chunk{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.chunk .emo{font-size:48px;line-height:1}
+.chunk .hz{font-size:38px;font-weight:800;letter-spacing:3px;color:var(--main-d)}
+.chunk .py{font-size:16.5px;color:var(--blue);font-weight:800}
+.chunk .vi{font-size:16px;font-weight:700}
+.chunk .use{font-size:13.5px;color:var(--muted)}
+
+/* thẻ tuổi */
+.agepick{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.agebtn{width:66px;height:66px;border-radius:16px;border:3px solid var(--line);background:#fff;
+  font-size:30px;font-weight:800;color:var(--main-d);cursor:pointer;font-family:inherit}
+.agebtn.on{background:var(--main);color:#fff;border-color:var(--main-d)}
+.namecard{background:linear-gradient(135deg,#e0559a,#f6b73c);color:#fff;border-radius:18px;padding:20px;
+  text-align:center;margin-top:14px}
+.namecard .big{font-size:36px;font-weight:800;letter-spacing:3px}
+.namecard .py{font-size:15px;opacity:.92;margin-top:4px}
+
+/* bánh nến */
+.cake{font-size:46px;line-height:1.1}
+.candles{font-size:22px;letter-spacing:2px;margin-top:-6px}
+.cakebox{background:#fff;border:3px solid var(--line);border-radius:16px;padding:12px;cursor:pointer;
+  text-align:center;min-width:130px}
+.cakebox.hit{border-color:var(--green);background:#e5f8ef}
+.cakebox.miss{border-color:var(--red);background:#fdece9}
+
+/* flashcard */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.fc{perspective:700px;cursor:pointer}
+.fci{position:relative;width:100%;padding-top:100%;transition:transform .45s;transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.fcf,.fcb{position:absolute;inset:0;border-radius:14px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;backface-visibility:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.fcf{background:#fff;border:3px solid var(--line)}
+.fcf span{font-size:44px;font-weight:800;color:var(--ink)}
+.fcb{background:var(--main);color:#fff;transform:rotateY(180deg);padding:6px;text-align:center}
+.fcb .p{font-size:16px;font-weight:800}.fcb .v{font-size:13px}
+#writerBox{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center}
+#writerTarget{background:#fff;border:3px dashed var(--line);border-radius:14px}
+
+/* games */
+.q{background:#fff;border-radius:14px;padding:14px;margin:10px 0;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.stem{font-weight:800;margin-bottom:8px;font-size:15px}
+.opts{display:flex;gap:10px;flex-wrap:wrap}
+.opt{background:#fff;border:3px solid var(--line);border-radius:14px;padding:10px 18px;cursor:pointer;
+  font-size:34px;font-weight:800;min-width:74px;font-family:inherit;color:var(--ink)}
+.opt.small{font-size:20px;padding:12px 16px;min-width:130px}
+.opt.correct{background:#e5f8ef;border-color:var(--green);color:var(--green)}
+.opt.wrong{background:#fdece9;border-color:var(--red);color:var(--red);opacity:.75}
+.bank,.answerbox{display:flex;gap:8px;flex-wrap:wrap;min-height:64px;padding:8px;border-radius:12px}
+.answerbox{background:#fff7fb;border:3px dashed var(--line)}
+.bank{background:#f4f4f4}
+.tok{font-size:30px;font-weight:800;background:#fff;border:3px solid var(--line);border-radius:12px;
+  padding:4px 12px;cursor:pointer;font-family:inherit;color:var(--main-d)}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:520px){.mgrid{grid-template-columns:repeat(3,1fr)}}
+.mc{aspect-ratio:1;border-radius:14px;border:3px solid var(--line);background:var(--main);color:#fff;
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;cursor:pointer;
+  font-weight:800;font-size:20px;user-select:none}
+.mc.open{background:#fff;color:var(--ink)}
+.mc.done{background:#e5f8ef;color:var(--green);border-color:var(--green);cursor:default}
+.mc .lbl{font-size:13px;font-weight:700}
+.situ{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.situ .scene{font-size:46px}
+.situ .txt{font-size:15.5px;font-weight:700;flex:1;min-width:200px}
+.turn{background:#fff7fb;border-radius:12px;padding:8px 12px;margin:6px 0}
+.turn .who{font-size:12px;color:var(--muted);font-weight:800}
+.turn .z{font-size:25px;font-weight:800}
+.turn .p{font-size:14px;color:var(--blue)}
+.turn .v{font-size:13px;color:var(--muted)}
+.lyr{font-size:27px;font-weight:800;letter-spacing:2px;margin:8px 0;color:var(--main-d)}
+.lyr small{display:block;font-size:13px;color:var(--blue);font-weight:700;letter-spacing:0}
+footer{text-align:center;padding:18px;color:var(--muted);font-size:12.5px}
+</style>
+</head>
+<body>
+<header>
+  <h1>第七课 我五岁</h1>
+  <p>Bài 7 — Em mấy tuổi? · Dành cho bé 6 tuổi</p>
+  <div class="starbar">⭐ <span id="stars">0</span> sao</div>
+</header>
+
+<div class="wrap">
+  <div class="tabs">
+    <button class="tab active" data-t="chunk">💬 Mẫu câu</button>
+    <button class="tab" data-t="me">🎂 Tuổi của em</button>
+    <button class="tab" data-t="cake">🕯️ Thổi nến</button>
+    <button class="tab" data-t="card">🃏 Mặt chữ</button>
+    <button class="tab" data-t="listen">🔊 Nghe – Tìm chữ</button>
+    <button class="tab" data-t="age">👂 Nghe tuổi</button>
+    <button class="tab" data-t="build">🧩 Ghép câu</button>
+    <button class="tab" data-t="sharp">🔍 Mắt tinh</button>
+    <button class="tab" data-t="match">🧠 Đôi bạn</button>
+    <button class="tab" data-t="situ">🎭 Tình huống</button>
+    <button class="tab" data-t="role">🎤 Đóng vai</button>
+    <button class="tab" data-t="song">🎵 Bài hát</button>
+  </div>
+
+  <!-- 1. MẪU CÂU -->
+  <section class="panel active" id="chunk">
+    <div class="teach">👩‍🏫 <b>Cô hỏi – bé đáp.</b> Cô đi vòng quanh lớp hỏi 你几岁？ từng bé. Bé nào cũng phải trả lời ít nhất 3 lần trong buổi.<br>
+      ⚠️ 你几岁？ chỉ dùng hỏi <b>trẻ em</b>. Hỏi người lớn phải nói 您多大年纪 — cô nhắc bé điều này ngay từ đầu.</div>
+    <div id="chunkList"></div>
+    <div class="card">
+      <h2 class="sec">👥 Các bạn trong sách</h2>
+      <div id="bookList"></div>
+    </div>
+  </section>
+
+  <!-- 2. TUỔI CỦA EM -->
+  <section class="panel" id="me">
+    <div class="teach">👩‍🏫 Bé chọn tuổi và lớp của mình, máy sẽ đọc câu trả lời để bé nghe và nhắc theo.</div>
+    <div class="card" style="text-align:center">
+      <h3 class="sub">Em mấy tuổi? 你几岁？</h3>
+      <div class="agepick" id="agePick"></div>
+      <h3 class="sub" style="margin-top:16px">Em học lớp mấy? 你上几年级？</h3>
+      <div class="agepick" id="gradePick"></div>
+      <div class="namecard">
+        <div style="font-size:14px;opacity:.85">Em nói:</div>
+        <div class="big" id="ncBig">我六岁。</div>
+        <div class="big" id="ncBig2" style="font-size:30px">我上一年级。</div>
+        <div class="py" id="ncPy">wǒ liù suì. wǒ shàng yī nián jí.</div>
+        <button class="btn ghost" id="ncPlay" style="margin-top:12px">🔊 Nghe cả hai câu</button>
+      </div>
+      <div class="hint" style="margin-top:12px">Luyện: cô hỏi 你几岁？ → bé chỉ vào thẻ và nói to câu của mình.</div>
+    </div>
+  </section>
+
+  <!-- 3. THỔI NẾN -->
+  <section class="panel" id="cake">
+    <div class="teach">👩‍🏫 Trò chơi sinh nhật: nghe câu <b>我〇岁</b> rồi chọn chiếc bánh có đúng số nến. Bé đếm nến to bằng tiếng Trung trước khi chọn.</div>
+    <div class="card" style="text-align:center">
+      <button class="btn big" id="ckPlay">🔊 Nghe</button>
+      <div class="row" id="ckRow" style="justify-content:center;margin-top:16px"></div>
+      <div class="fb" id="ckFb"></div>
+      <div class="hint">Đúng: <b id="ckScore">0</b> / <b id="ckTotal">0</b></div>
+    </div>
+  </section>
+
+  <!-- 4. MẶT CHỮ -->
+  <section class="panel" id="card">
+    <div class="teach">👩‍🏫 Bấm thẻ để lật. Mỗi chữ có một câu chuyện nhỏ giúp bé nhớ mặt chữ.</div>
+    <div class="card">
+      <div class="grid" id="fcGrid"></div>
+      <div style="text-align:center;margin-top:12px"><button class="btn ghost" id="fcAllBack">🔄 Úp hết thẻ lại</button></div>
+    </div>
+    <div class="card">
+      <h2 class="sec">✍️ Xem chữ được viết ra sao</h2>
+      <div id="writerBox">
+        <div id="writerTarget"></div>
+        <div><div id="writerInfo" class="hint">Chọn một chữ bên dưới</div>
+          <div class="opts" id="writerPick" style="margin-top:8px"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. NGHE – TÌM CHỮ -->
+  <section class="panel" id="listen">
+    <div class="teach">👩‍🏫 Bé bấm 🔊 nghe, rồi chọn mặt chữ đúng.</div>
+    <div id="listenList"></div>
+  </section>
+
+  <!-- 6. NGHE TUỔI -->
+  <section class="panel" id="age">
+    <div class="teach">👩‍🏫 Nghe cả câu <b>我〇岁</b> rồi chọn đúng chữ số. Vừa ôn số bài 1–2, vừa luyện nghe câu.</div>
+    <div class="card" style="text-align:center">
+      <button class="btn big" id="agPlay">🔊 Nghe câu</button>
+      <div class="opts" id="agOpts" style="justify-content:center;margin-top:16px"></div>
+      <div class="fb" id="agFb"></div>
+      <div class="hint">Đúng: <b id="agScore">0</b> / <b id="agTotal">0</b></div>
+    </div>
+  </section>
+
+  <!-- 7. GHÉP CÂU -->
+  <section class="panel" id="build">
+    <div class="teach">👩‍🏫 Bấm từng chữ theo đúng thứ tự để ghép thành câu, rồi đọc to.</div>
+    <div id="buildList"></div>
+  </section>
+
+  <!-- 8. MẮT TINH -->
+  <section class="panel" id="sharp">
+    <div class="teach">👩‍🏫 Bài này có cặp chữ rất dễ nhầm là <b>几</b> và <b>九</b> — cho bé nhìn thật kỹ trước khi chọn.</div>
+    <div id="sharpList"></div>
+  </section>
+
+  <!-- 9. ĐÔI BẠN -->
+  <section class="panel" id="match">
+    <div class="teach">👩‍🏫 Lật 2 thẻ, ghép chữ Hán với nghĩa tiếng Việt. Tìm đủ 6 cặp.</div>
+    <div class="card">
+      <div class="mgrid" id="mGrid"></div>
+      <div class="row" style="justify-content:space-between;margin-top:12px">
+        <div class="fb ok" id="mFb"></div>
+        <button class="btn ghost" id="mReset">🔄 Chơi lại</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. TÌNH HUỐNG -->
+  <section class="panel" id="situ">
+    <div class="teach">👩‍🏫 Cô kể tình huống, bé chọn câu đúng rồi nói to lên.</div>
+    <div id="situList"></div>
+  </section>
+
+  <!-- 11. ĐÓNG VAI -->
+  <section class="panel" id="role">
+    <div class="teach">👩‍🏫 Bé đọc theo rồi bấm 🎤 tự nói. Mở bằng <b>Chrome trên máy tính</b> để chấm giọng.</div>
+    <div id="roleList"></div>
+    <div class="card">
+      <h3 class="sub">🗣 Nhiệm vụ phỏng vấn</h3>
+      <div id="taskList"></div>
+    </div>
+  </section>
+
+  <!-- 12. BÀI HÁT -->
+  <section class="panel" id="song">
+    <div class="teach">👩‍🏫 Hát nhịp 2/4 (♩=52). Hát xong đổi tên 京京 thành tên một bé trong lớp và hát lại.</div>
+    <div class="card" id="songBox"></div>
+  </section>
+
+  <footer>Tiếng Trung Hà Nam Ninh · Giáo trình <i>Easy Steps to Chinese for Kids 1a</i>, Bài 7 (tr. 74–85)</footer>
+</div>
+
+<script>
+/* ================= DỮ LIỆU ================= */
+const D=['一','二','三','四','五','六','七','八','九','十'];
+const PY=['yī','èr','sān','sì','wǔ','liù','qī','bā','jiǔ','shí'];
+
+const CHUNKS=[
+ {emo:'🎂',hz:'你几岁？',py:'nǐ jǐ suì?',vi:'Em mấy tuổi?',use:'Hỏi tuổi bạn nhỏ. Không dùng với người lớn.'},
+ {emo:'✋',hz:'我五岁。',py:'wǒ wǔ suì.',vi:'Mình 5 tuổi.',use:'Thay 五 bằng tuổi của em.'},
+ {emo:'🏫',hz:'你上几年级？',py:'nǐ shàng jǐ nián jí?',vi:'Em học lớp mấy?',use:'Hỏi bạn học lớp mấy.'},
+ {emo:'1️⃣',hz:'我上一年级。',py:'wǒ shàng yī nián jí.',vi:'Mình học lớp 1.',use:'Thay 一 bằng lớp của em.'},
+ {emo:'👫',hz:'我们都上一年级。',py:'wǒ men dōu shàng yī nián jí.',vi:'Chúng mình đều học lớp 1.',
+  use:'都 = đều, cả hai. Dùng khi giống nhau.'}
+];
+
+const BOOK=[
+ ['京京','Jīng jing','我五岁。'],
+ ['丁一','Dīng Yī','我上一年级。']
+];
+
+const CHARS=[
+ {hz:'岁',py:'suì',vi:'tuổi',tip:'山 (núi) ở trên + 夕 (buổi tối) ở dưới. Mỗi tuổi là leo qua một quả núi.'},
+ {hz:'几',py:'jǐ',vi:'mấy',tip:'Chỉ 2 nét, như cái ghế nhỏ. Khác 九 — 九 có nét phẩy dài vắt sang.'},
+ {hz:'上',py:'shàng',vi:'lên, học (lớp)',tip:'Nét sổ đứng rồi vươn LÊN trên vạch ngang. Ngược với 下.'},
+ {hz:'年',py:'nián',vi:'năm',tip:'Giống 牛 (con trâu) nhưng có thêm một nét ngang.'},
+ {hz:'级',py:'jí',vi:'lớp, cấp',tip:'纟 (sợi tơ) bên trái — như các bậc thang xếp thành cấp.'},
+ {hz:'都',py:'dōu',vi:'đều, cả hai',tip:'Bên phải là 阝 (tai bên phải). Trong bài hát: 我们都……'},
+ {hz:'我',py:'wǒ',vi:'mình, tôi',tip:'Bên phải là 戈 (cây giáo) — tay cầm giáo chỉ vào MÌNH.'}
+];
+
+const LISTEN=[
+ {say:'岁',ask:'Chữ nào là <b>suì</b> (tuổi)?',opts:['多','岁','夕'],ans:1},
+ {say:'几',ask:'Chữ nào là <b>jǐ</b> (mấy)?',opts:['九','凡','几'],ans:2},
+ {say:'年',ask:'Chữ nào là <b>nián</b> (năm)?',opts:['年','牛','午'],ans:0},
+ {say:'上',ask:'Chữ nào là <b>shàng</b> (lên)?',opts:['下','土','上'],ans:2},
+ {say:'级',ask:'Chữ nào là <b>jí</b> (lớp)?',opts:['级','极','纪'],ans:0},
+ {say:'都',ask:'Chữ nào là <b>dōu</b> (đều)?',opts:['部','都','郡'],ans:1},
+ {say:'几岁',ask:'Từ nào là <b>jǐ suì</b>?',opts:['年级','几岁','我们'],ans:1},
+ {say:'年级',ask:'Từ nào là <b>nián jí</b>?',opts:['年级','几岁','都上'],ans:0}
+];
+
+const BUILD=[
+ {toks:['你','几','岁'],ans:'你几岁',vi:'Em mấy tuổi?'},
+ {toks:['我','五','岁'],ans:'我五岁',vi:'Mình 5 tuổi.'},
+ {toks:['你','上','几','年','级'],ans:'你上几年级',vi:'Em học lớp mấy?'},
+ {toks:['我','上','一','年','级'],ans:'我上一年级',vi:'Mình học lớp 1.'},
+ {toks:['我','们','都','上','一','年','级'],ans:'我们都上一年级',vi:'Chúng mình đều học lớp 1.'}
+];
+
+const SHARP=[
+ {ask:'<b>jǐ</b> — mấy',opts:['九','几','凡'],ans:1,why:'几 chỉ 2 nét, đầu bằng. 九 có nét phẩy dài vắt sang phải.'},
+ {ask:'<b>jiǔ</b> — số 9',opts:['几','凡','九'],ans:2,why:'九 bắt đầu bằng nét phẩy ngang rồi mới móc xuống.'},
+ {ask:'<b>suì</b> — tuổi',opts:['岁','多','夕'],ans:0,why:'岁 = 山 ở trên + 夕 ở dưới. 多 là hai chữ 夕 chồng lên nhau.'},
+ {ask:'<b>nián</b> — năm',opts:['牛','年','午'],ans:1,why:'年 có 2 nét ngang dài ở giữa; 牛 chỉ có 1.'},
+ {ask:'<b>shàng</b> — lên',opts:['下','上','土'],ans:1,why:'上 vươn lên trên vạch ngang, 下 chúc xuống dưới.'},
+ {ask:'<b>jí</b> — lớp',opts:['极','级','纪'],ans:1,why:'级 = 纟 + 及. 极 bên trái là 木 (cây).'},
+ {ask:'<b>wǒ</b> — mình',opts:['找','我','戈'],ans:1,why:'我 không có bộ 扌 (tay) như 找.'}
+];
+
+const PAIRS=[
+ ['岁','tuổi'],['几','mấy'],['年级','lớp (khối)'],['都','đều, cả hai'],
+ ['我五岁','mình 5 tuổi'],['你几岁','em mấy tuổi']
+];
+
+const SITU=[
+ {scene:'🧒❓',txt:'Con muốn biết bạn mới mấy tuổi. Con hỏi thế nào?',
+  opts:['你几岁？','我几岁？','你上几年级？'],ans:0,say:'你几岁',why:'Hỏi người khác dùng 你.'},
+ {scene:'👩‍🏫✋',txt:'Cô hỏi con: 你几岁？ Con 6 tuổi. Con trả lời?',
+  opts:['我六岁。','你六岁。','我上六年级。'],ans:0,say:'我六岁',why:'我 + số + 岁.'},
+ {scene:'🏫❓',txt:'Con muốn biết bạn học lớp mấy.',
+  opts:['你几岁？','你上几年级？','我上一年级。'],ans:1,say:'你上几年级',why:'Hỏi lớp dùng 上几年级.'},
+ {scene:'1️⃣😊',txt:'Bạn hỏi 你上几年级？ Con học lớp 1.',
+  opts:['我上一年级。','我一岁。','我们都上一年级。'],ans:0,say:'我上一年级',why:'我上 + số + 年级.'},
+ {scene:'👫🎒',txt:'Con và bạn cùng học lớp 1. Con nói gì?',
+  opts:['我上一年级。','我们都上一年级。','你上几年级？'],ans:1,say:'我们都上一年级',
+  why:'都 dùng khi cả hai giống nhau.'},
+ {scene:'👴🙅',txt:'Con gặp ông của bạn. Câu nào KHÔNG nên nói với người lớn?',
+  opts:['您好！','你几岁？','谢谢您！'],ans:1,say:'您好',
+  why:'你几岁 chỉ hỏi trẻ em. Với người lớn nói 您好 cho lễ phép.'}
+];
+
+const ROLE=[
+ {title:'Cảnh 1 — Hỏi tuổi bạn',
+  turns:[['A','你好！你几岁？','nǐ hǎo! nǐ jǐ suì?','Chào bạn! Bạn mấy tuổi?'],
+         ['B','我六岁。你呢？','wǒ liù suì. nǐ ne?','Mình 6 tuổi. Còn bạn?'],
+         ['A','我也六岁。','wǒ yě liù suì.','Mình cũng 6 tuổi.']],
+  keys:['你几岁','我六岁']},
+ {title:'Cảnh 2 — Hỏi lớp',
+  turns:[['A','你上几年级？','nǐ shàng jǐ nián jí?','Bạn học lớp mấy?'],
+         ['B','我上一年级。','wǒ shàng yī nián jí.','Mình học lớp 1.'],
+         ['A','我也上一年级，我们都上一年级！','wǒ yě shàng yī nián jí, wǒ men dōu shàng yī nián jí!',
+          'Mình cũng lớp 1, chúng mình đều học lớp 1!']],
+  keys:['几年级','一年级']},
+ {title:'Cảnh 3 — Cô giáo hỏi',
+  turns:[['老师','你叫什么名字？','nǐ jiào shén me míng zi?','Con tên là gì?'],
+         ['学生','老师好！我叫京京。','lǎo shī hǎo! wǒ jiào Jīng jing.','Con chào cô ạ! Con tên Kinh Kinh.'],
+         ['老师','你几岁？','nǐ jǐ suì?','Con mấy tuổi?'],
+         ['学生','我五岁。','wǒ wǔ suì.','Con 5 tuổi ạ.']],
+  keys:['我叫','我五岁']}
+];
+
+const TASKS=[
+ 'Hỏi 5 bạn trong lớp: 你几岁？ rồi giơ ngón tay đúng số tuổi bạn trả lời.',
+ 'Xếp hàng theo tuổi: bé nào cũng phải nói 我〇岁 mới được đứng vào chỗ.',
+ 'Cô chỉ một bạn bất kỳ, cả lớp cùng nói: 他/她〇岁。',
+ 'Tìm bạn cùng tuổi với mình, hai bạn nắm tay nói: 我们都〇岁！',
+ 'Về nhà hỏi bố mẹ và nói lại tuổi của mình bằng tiếng Trung.'
+];
+
+const SONG=[
+ ['京京五岁，我五岁，我们都上一年级。','Jīng jing wǔ suì, wǒ wǔ suì, wǒ men dōu shàng yī nián jí.'],
+ ['京京五岁，我五岁，我们都上一年级。','Jīng jing wǔ suì, wǒ wǔ suì, wǒ men dōu shàng yī nián jí.']
+];
+
+/* ================= NỀN ================= */
+let zhVoice=null;
+function pickVoice(){const vs=speechSynthesis.getVoices();
+ zhVoice=vs.find(v=>/zh[-_]CN/i.test(v.lang))||vs.find(v=>/zh/i.test(v.lang))||null;}
+pickVoice(); if(speechSynthesis.onvoiceschanged!==undefined) speechSynthesis.onvoiceschanged=pickVoice;
+function speak(t,r){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';u.rate=(r||0.75);if(zhVoice)u.voice=zhVoice;
+ speechSynthesis.speak(u);}
+function speakSeq(list,gap,rate){let k=0;const go=()=>{if(k>=list.length)return;speak(list[k],rate||0.72);
+ k++;setTimeout(go,gap||1800);};go();}
+let stars=0;
+function addStar(n){stars+=(n||1);document.getElementById('stars').textContent=stars;}
+const rnd=n=>Math.random()*n|0;
+function shuffleArr(a){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=rnd(i+1);const t=b[i];b[i]=b[j];b[j]=t;}return b;}
+
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+ document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+ t.classList.add('active');document.getElementById(t.dataset.t).classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});});
+document.addEventListener('click',e=>{const s=e.target.closest('.sound');if(s&&s.dataset.z)speak(s.dataset.z);});
+
+/* ================= 1. MẪU CÂU ================= */
+(function(){const box=document.getElementById('chunkList');
+ CHUNKS.forEach(c=>{const d=document.createElement('div');d.className='card chunk';
+  d.innerHTML='<div class="emo">'+c.emo+'</div><div style="flex:1;min-width:200px">'+
+   '<div class="hz">'+c.hz+' <button class="sound" data-z="'+c.hz+'">🔊</button></div>'+
+   '<div class="py">'+c.py+'</div><div class="vi">'+c.vi+'</div><div class="use">👉 '+c.use+'</div></div>';
+  box.appendChild(d);});
+ const bl=document.getElementById('bookList');
+ BOOK.forEach(b=>{const d=document.createElement('div');d.className='row';d.style.margin='8px 0';
+  d.innerHTML='<div style="font-size:26px;font-weight:800;color:var(--main-d)">'+b[0]+'：'+b[2]+'</div>'+
+   '<div class="hint">'+b[1]+'</div><button class="sound" data-z="'+b[2]+'">🔊</button>';
+  bl.appendChild(d);});
+})();
+
+/* ================= 2. TUỔI CỦA EM ================= */
+(function(){
+ let age=6,grade=1;
+ const ap=document.getElementById('agePick'),gp=document.getElementById('gradePick');
+ function render(){
+  const s1='我'+D[age-1]+'岁。',s2='我上'+D[grade-1]+'年级。';
+  document.getElementById('ncBig').textContent=s1;
+  document.getElementById('ncBig2').textContent=s2;
+  document.getElementById('ncPy').textContent='wǒ '+PY[age-1]+' suì. wǒ shàng '+PY[grade-1]+' nián jí.';
+  document.getElementById('ncPlay').onclick=()=>speakSeq([s1,s2],2000);
+  [...ap.children].forEach(b=>b.classList.toggle('on',+b.dataset.v===age));
+  [...gp.children].forEach(b=>b.classList.toggle('on',+b.dataset.v===grade));
+  return [s1,s2];}
+ for(let i=4;i<=10;i++){const b=document.createElement('button');b.className='agebtn';b.textContent=D[i-1];
+  b.dataset.v=i;b.onclick=()=>{age=i;const s=render();speak(s[0]);};ap.appendChild(b);}
+ for(let i=1;i<=5;i++){const b=document.createElement('button');b.className='agebtn';b.textContent=D[i-1];
+  b.dataset.v=i;b.onclick=()=>{grade=i;const s=render();speak(s[1]);};gp.appendChild(b);}
+ render();
+})();
+
+/* ================= 3. THỔI NẾN ================= */
+(function(){
+ const row=document.getElementById('ckRow'),fb=document.getElementById('ckFb');
+ let cur=null,score=0,total=0;
+ function next(){
+  cur=3+rnd(8); /* 3..10 */
+  let opts=[cur];while(opts.length<3){const r=3+rnd(8);if(opts.indexOf(r)<0)opts.push(r);}
+  opts=shuffleArr(opts);
+  row.innerHTML=opts.map(v=>'<div class="cakebox" data-v="'+v+'"><div class="candles">'+
+   '🕯️'.repeat(v)+'</div><div class="cake">🎂</div></div>').join('');
+  fb.textContent='';speak('我'+D[cur-1]+'岁。');}
+ row.addEventListener('click',e=>{const c=e.target.closest('[data-v]');if(!c)return;
+  const v=+c.dataset.v;total++;document.getElementById('ckTotal').textContent=total;
+  if(v===cur){score++;document.getElementById('ckScore').textContent=score;c.classList.add('hit');
+   fb.innerHTML='✓ Đúng rồi! <b>我'+D[cur-1]+'岁。</b> +1 ⭐';fb.className='fb ok';addStar(1);
+   setTimeout(next,1800);}
+  else{c.classList.add('miss');fb.innerHTML='✗ Bạn ấy <b>'+D[cur-1]+'</b> tuổi. Đếm lại nến nhé!';
+   fb.className='fb no';setTimeout(()=>c.classList.remove('miss'),900);}});
+ document.getElementById('ckPlay').onclick=()=>{if(cur)speak('我'+D[cur-1]+'岁。');else next();};
+ next();
+})();
+
+/* ================= 4. MẶT CHỮ ================= */
+(function(){const g=document.getElementById('fcGrid');
+ CHARS.forEach(c=>{const d=document.createElement('div');d.className='fc';
+  d.innerHTML='<div class="fci"><div class="fcf"><span>'+c.hz+'</span></div>'+
+   '<div class="fcb"><div class="p">'+c.py+'</div><div class="v">'+c.vi+'</div></div></div>';
+  d.onclick=()=>{d.classList.toggle('flip');speak(c.hz);};g.appendChild(d);});
+ document.getElementById('fcAllBack').onclick=()=>document.querySelectorAll('#fcGrid .fc').forEach(x=>x.classList.remove('flip'));
+ const pick=document.getElementById('writerPick');
+ CHARS.forEach(c=>{const b=document.createElement('button');b.className='opt small';b.textContent=c.hz;
+  b.style.fontSize='26px';b.style.minWidth='58px';b.style.padding='6px 10px';
+  b.onclick=()=>{speak(c.hz);
+   document.getElementById('writerInfo').innerHTML='<b style="font-size:20px">'+c.hz+'</b> · '+c.py+' — '+c.vi+
+    '<br><span class="hint">💡 '+c.tip+'</span>';
+   if(typeof HanziWriter==='undefined'){document.getElementById('writerTarget').innerHTML=
+    '<div style="padding:40px 16px;text-align:center;font-size:13px;color:#8d6b7c">Cần kết nối mạng<br>để xem nét chữ</div>';return;}
+   document.getElementById('writerTarget').innerHTML='';
+   HanziWriter.create('writerTarget',c.hz,{width:200,height:200,padding:8,showOutline:true,
+    strokeAnimationSpeed:0.8,delayBetweenStrokes:320,strokeColor:'#e0559a',outlineColor:'#f5c3dd'}).animateCharacter();};
+  pick.appendChild(b);});
+})();
+
+/* ================= 5. NGHE – TÌM CHỮ ================= */
+(function(){const box=document.getElementById('listenList');let done={};
+ LISTEN.forEach((q,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="stem">Câu '+(i+1)+'. '+q.ask+' <button class="sound" data-z="'+q.say+'">🔊</button></div>'+
+   '<div class="opts">'+q.opts.map((o,oi)=>'<button class="opt" data-i="'+i+'" data-o="'+oi+'">'+o+'</button>').join('')+
+   '</div><div class="fb" id="lfb'+i+'"></div>';
+  box.appendChild(d);});
+ box.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;
+  const i=+b.dataset.i,o=+b.dataset.o,q=LISTEN[i];if(done[i])return;done[i]=1;
+  const fb=document.getElementById('lfb'+i);
+  if(o===q.ans){b.classList.add('correct');fb.textContent='✓ Giỏi lắm! +1 ⭐';fb.className='fb ok';addStar(1);}
+  else{b.classList.add('wrong');[...b.parentElement.querySelectorAll('.opt')][q.ans].classList.add('correct');
+   fb.textContent='✗ Chữ đúng là '+q.opts[q.ans];fb.className='fb no';}
+  speak(q.say);});
+})();
+
+/* ================= 6. NGHE TUỔI ================= */
+(function(){
+ const opts=document.getElementById('agOpts'),fb=document.getElementById('agFb');
+ let cur=null,score=0,total=0;
+ function next(){cur=1+rnd(10);
+  let o=[cur];while(o.length<4){const r=1+rnd(10);if(o.indexOf(r)<0)o.push(r);}
+  o=shuffleArr(o);
+  opts.innerHTML=o.map(v=>'<button class="opt" data-v="'+v+'">'+D[v-1]+'</button>').join('');
+  fb.textContent='';speak('我'+D[cur-1]+'岁。');}
+ opts.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;
+  const v=+b.dataset.v;total++;document.getElementById('agTotal').textContent=total;
+  if(v===cur){score++;document.getElementById('agScore').textContent=score;b.classList.add('correct');
+   fb.innerHTML='✓ Đúng! <b>我'+D[cur-1]+'岁。</b> +1 ⭐';fb.className='fb ok';addStar(1);
+   setTimeout(next,1700);}
+  else{b.classList.add('wrong');fb.innerHTML='✗ Nghe lại nhé — đáp án là <b>'+D[cur-1]+'</b>';fb.className='fb no';
+   speak('我'+D[cur-1]+'岁。');}});
+ document.getElementById('agPlay').onclick=()=>{if(cur)speak('我'+D[cur-1]+'岁。');else next();};
+ next();
+})();
+
+/* ================= 7. GHÉP CÂU ================= */
+(function(){const box=document.getElementById('buildList');
+ function bind(btn,i){btn.onclick=()=>{box.querySelector('[data-ans="'+i+'"]').appendChild(btn);
+   speak(btn.textContent);
+   btn.onclick=()=>{box.querySelector('[data-bank="'+i+'"]').appendChild(btn);bind(btn,i);};};}
+ function fill(i,items){const bank=box.querySelector('[data-bank="'+i+'"]');bank.innerHTML='';
+   items.forEach(t=>{const b=document.createElement('button');b.className='tok';b.textContent=t;bind(b,i);bank.appendChild(b);});}
+ const scored={};
+ BUILD.forEach((o,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="stem">Câu '+(i+1)+'. Ghép câu: “'+o.vi+'”</div>'+
+   '<div class="answerbox" data-ans="'+i+'"></div><div class="bank" data-bank="'+i+'"></div>'+
+   '<div style="margin-top:8px"><button class="btn" data-ck="'+i+'">Kiểm tra</button> '+
+   '<button class="btn ghost" data-rs="'+i+'">Làm lại</button> '+
+   '<button class="sound" data-z="'+o.ans+'">🔊</button></div><div class="fb" id="bfb'+i+'"></div>';
+  box.appendChild(d);fill(i,shuffleArr(o.toks));});
+ box.addEventListener('click',e=>{
+  const ck=e.target.closest('[data-ck]');
+  if(ck){const i=+ck.dataset.ck,o=BUILD[i],fb=document.getElementById('bfb'+i);
+   const got=[...box.querySelector('[data-ans="'+i+'"]').querySelectorAll('.tok')].map(x=>x.textContent).join('');
+   if(got===o.ans){fb.textContent='✓ Chính xác! '+o.ans+(scored[i]?'':' +1 ⭐');fb.className='fb ok';
+    if(!scored[i]){scored[i]=1;addStar(1);}speak(o.ans);}
+   else{fb.textContent='✗ Chưa đúng, thử lại nhé!';fb.className='fb no';}return;}
+  const rs=e.target.closest('[data-rs]');
+  if(rs){const i=+rs.dataset.rs;box.querySelector('[data-ans="'+i+'"]').innerHTML='';
+   fill(i,shuffleArr(BUILD[i].toks));document.getElementById('bfb'+i).textContent='';}});
+})();
+
+/* ================= 8. MẮT TINH ================= */
+(function(){const box=document.getElementById('sharpList');let done={};
+ SHARP.forEach((q,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="stem">Câu '+(i+1)+'. Chữ nào là '+q.ask+'?</div>'+
+   '<div class="opts">'+q.opts.map((o,oi)=>'<button class="opt" data-i="'+i+'" data-o="'+oi+'">'+o+'</button>').join('')+
+   '</div><div class="fb" id="sfb'+i+'"></div>';
+  box.appendChild(d);});
+ box.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;
+  const i=+b.dataset.i,o=+b.dataset.o,q=SHARP[i];if(done[i])return;done[i]=1;
+  const fb=document.getElementById('sfb'+i);
+  if(o===q.ans){b.classList.add('correct');fb.innerHTML='✓ Đúng rồi! +1 ⭐<br><span class="hint">💡 '+q.why+'</span>';
+   fb.className='fb ok';addStar(1);}
+  else{b.classList.add('wrong');[...b.parentElement.querySelectorAll('.opt')][q.ans].classList.add('correct');
+   fb.innerHTML='✗ Chữ đúng là '+q.opts[q.ans]+'<br><span class="hint">💡 '+q.why+'</span>';fb.className='fb no';}
+  speak(q.opts[q.ans]);});
+})();
+
+/* ================= 9. ĐÔI BẠN ================= */
+(function(){
+ const grid=document.getElementById('mGrid'),fb=document.getElementById('mFb');
+ let first=null,lock=false,found=0,scored=false;
+ function build(){grid.innerHTML='';first=null;lock=false;found=0;fb.textContent='';
+  let cards=[];
+  PAIRS.forEach((p,i)=>{cards.push({k:i,t:p[0],zh:true});cards.push({k:i,t:p[1],zh:false});});
+  cards=shuffleArr(cards);
+  cards.forEach(c=>{const d=document.createElement('div');d.className='mc';d.textContent='?';
+   d.dataset.k=c.k;d.dataset.zh=c.zh?'1':'0';
+   d.onclick=()=>{
+    if(lock||d.classList.contains('done')||d.classList.contains('open'))return;
+    d.classList.add('open');
+    if(c.zh){d.innerHTML='<span style="font-size:21px">'+c.t+'</span>';speak(c.t);}
+    else{d.innerHTML='<span class="lbl">'+c.t+'</span>';}
+    if(!first){first=d;return;}
+    if(first.dataset.k===d.dataset.k&&first.dataset.zh!==d.dataset.zh){
+     first.classList.add('done');d.classList.add('done');first=null;found++;
+     fb.textContent='✓ Tìm được '+found+'/'+PAIRS.length+' cặp';
+     if(found===PAIRS.length){fb.textContent='🎉 Hoàn thành! '+(scored?'':'+3 ⭐');
+      if(!scored){scored=true;addStar(3);}}}
+    else{lock=true;const a=first;first=null;
+     setTimeout(()=>{a.classList.remove('open');a.textContent='?';d.classList.remove('open');d.textContent='?';lock=false;},900);}};
+   grid.appendChild(d);});}
+ build();document.getElementById('mReset').onclick=build;
+})();
+
+/* ================= 10. TÌNH HUỐNG ================= */
+(function(){const box=document.getElementById('situList');let done={};
+ SITU.forEach((s,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="situ"><div class="scene">'+s.scene+'</div><div class="txt">'+(i+1)+'. '+s.txt+'</div></div>'+
+   '<div class="opts">'+s.opts.map((o,oi)=>'<button class="opt small" data-i="'+i+'" data-o="'+oi+'">'+o+'</button>').join('')+
+   '</div><div class="fb" id="tfb'+i+'"></div>';
+  box.appendChild(d);});
+ box.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;
+  const i=+b.dataset.i,o=+b.dataset.o,s=SITU[i];if(done[i])return;done[i]=1;
+  const fb=document.getElementById('tfb'+i);
+  if(o===s.ans){b.classList.add('correct');
+   fb.innerHTML='✓ Đúng rồi! +1 ⭐ — Bé nói to: <b>'+s.say+'</b><br><span class="hint">💡 '+s.why+'</span>';
+   fb.className='fb ok';addStar(1);}
+  else{b.classList.add('wrong');[...b.parentElement.querySelectorAll('.opt')][s.ans].classList.add('correct');
+   fb.innerHTML='✗ Câu đúng là <b>'+s.opts[s.ans]+'</b><br><span class="hint">💡 '+s.why+'</span>';fb.className='fb no';}
+  speak(s.say);});
+})();
+
+/* ================= 11. ĐÓNG VAI ================= */
+(function(){const box=document.getElementById('roleList');
+ ROLE.forEach((r,i)=>{const d=document.createElement('div');d.className='card';
+  let h='<h2 class="sec">'+r.title+'</h2>';
+  r.turns.forEach(t=>{h+='<div class="turn"><div class="who">'+t[0]+'</div><div class="z">'+t[1]+
+   ' <button class="sound" data-z="'+t[1]+'">🔊</button></div><div class="p">'+t[2]+'</div><div class="v">'+t[3]+'</div></div>';});
+  h+='<div class="row" style="margin-top:10px"><button class="btn" data-play="'+i+'">▶️ Nghe cả cảnh</button>'+
+     '<button class="btn ghost" data-mic="'+i+'">🎤 Bé nói thử</button></div><div class="fb" id="rfb'+i+'"></div>';
+  d.innerHTML=h;box.appendChild(d);});
+ box.addEventListener('click',e=>{
+  const p=e.target.closest('[data-play]');
+  if(p){speakSeq(ROLE[+p.dataset.play].turns.map(t=>t[1]),2400);return;}
+  const m=e.target.closest('[data-mic]');
+  if(m){const i=+m.dataset.mic,r=ROLE[i],fb=document.getElementById('rfb'+i);
+   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+   if(!SR){fb.textContent='Hãy mở bằng Chrome trên máy tính để chấm giọng nhé.';fb.className='fb no';return;}
+   const rec=new SR();rec.lang='zh-CN';rec.interimResults=false;
+   fb.textContent='🎙️ Cô đang nghe...';fb.className='fb';
+   rec.onresult=ev=>{const said=ev.results[0][0].transcript.replace(/\s/g,'');
+    const miss=r.keys.filter(k=>said.indexOf(k)<0);
+    if(miss.length){fb.textContent='Bé nói: “'+said+'”. Còn thiếu: '+miss.join('、');fb.className='fb no';}
+    else{fb.textContent='✓ Tuyệt vời! Bé nói: '+said+' +2 ⭐';fb.className='fb ok';addStar(2);}};
+   rec.onerror=()=>{fb.textContent='Cô chưa nghe rõ, bé nói lại nhé.';fb.className='fb no';};
+   rec.start();}});
+ document.getElementById('taskList').innerHTML=TASKS.map((t,i)=>
+  '<div class="q"><b>Nhiệm vụ '+(i+1)+'.</b> '+t+'</div>').join('');
+})();
+
+/* ================= 12. BÀI HÁT ================= */
+(function(){const box=document.getElementById('songBox');
+ let h='<h2 class="sec">🎵 我五岁 (♩=52, nhịp 2/4)</h2>';
+ SONG.forEach(l=>{h+='<div class="lyr">'+l[0]+' <button class="sound" data-z="'+l[0]+'">🔊</button><small>'+l[1]+'</small></div>';});
+ h+='<div style="margin-top:10px"><button class="btn" id="songAll">▶️ Hát cả bài</button></div>'+
+    '<div class="hint" style="margin-top:10px">💡 Hát vòng tròn: thay 京京 bằng tên bé đang cầm bóng, và thay 五岁 bằng tuổi thật của bé.</div>';
+ box.innerHTML=h;
+ document.getElementById('songAll').onclick=()=>speakSeq(SONG.map(l=>l[0]),5600,0.68);
+})();
+</script>
+</body>
+</html>
