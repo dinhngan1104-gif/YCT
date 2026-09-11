@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiểm tra NGHE – ĐỌC – VIẾT – DỊCH · Sách 1a + 1b</title>
+<style>
+:root{
+  --main:#3d4fa8;--main-d:#2a3880;--soft:#e2e6f8;--bg:#f5f6fc;--ink:#232842;--muted:#6f7695;
+  --line:#c3caee;--green:#1f9d63;--red:#dc3b3b;--gold:#e69b16;--teal:#0f8d86;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"Segoe UI","Microsoft YaHei",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(135deg,#3d4fa8,#0f8d86);color:#fff;padding:18px 14px;text-align:center}
+header h1{margin:0;font-size:23px}
+header p{margin:4px 0 0;font-size:13.5px;opacity:.95}
+.wrap{max-width:920px;margin:0 auto;padding:12px}
+.scorebar{position:sticky;top:0;z-index:20;background:#fff;border:3px solid var(--line);border-radius:14px;
+  padding:10px 14px;margin:12px 0;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center;
+  box-shadow:0 2px 10px rgba(60,70,160,.12)}
+.scorebar b{font-size:19px;color:var(--main-d)}
+.card{background:#fff;border-radius:14px;padding:16px;margin:14px 0;box-shadow:0 2px 8px rgba(60,70,160,.09)}
+.sechead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:3px solid var(--soft);
+  padding-bottom:8px;margin-bottom:10px}
+.sechead h2{margin:0;font-size:18.5px;color:var(--main-d)}
+.tag{font-size:12px;font-weight:800;color:#fff;background:var(--green);border-radius:999px;padding:2px 10px}
+.tag.hand{background:var(--gold)}
+.pt{font-size:13px;color:var(--muted);font-weight:700}
+.btn{border:none;border-radius:10px;padding:9px 15px;font-weight:800;cursor:pointer;background:var(--main);color:#fff;font-size:14px}
+.btn.ghost{background:#fff;color:var(--main);border:2px solid var(--line)}
+.btn.big{font-size:16px;padding:12px 22px}
+.btn:active{transform:scale(.98)}
+.sound{font-size:22px;background:none;border:none;cursor:pointer;color:var(--main)}
+.hint{font-size:13px;color:var(--muted)}
+.q{border:2px solid var(--soft);border-radius:12px;padding:12px;margin:10px 0}
+.stem{font-weight:700;margin-bottom:8px;font-size:15px}
+.opts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.opt{background:#fff;border:2.5px solid var(--line);border-radius:10px;padding:9px 15px;cursor:pointer;
+  font-size:22px;font-weight:800;min-width:64px;font-family:inherit;color:var(--ink)}
+.opt.small{font-size:15.5px;padding:10px 14px;min-width:110px;font-weight:700}
+.opt.tf{font-size:17px;min-width:120px}
+.opt.correct{background:#e6f7ef;border-color:var(--green);color:var(--green)}
+.opt.wrong{background:#fdeaea;border-color:var(--red);color:var(--red);opacity:.8}
+.fb{font-weight:800;font-size:13.5px;margin-top:7px;min-height:18px}
+.fb.ok{color:var(--green)}.fb.no{color:var(--red)}
+.pic{font-size:60px;line-height:1.1;text-align:center}
+.picrow{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.bank,.answerbox{display:flex;gap:7px;flex-wrap:wrap;min-height:56px;padding:7px;border-radius:10px}
+.answerbox{background:#f7f8ff;border:2.5px dashed var(--line)}
+.bank{background:#f3f3f3}
+.tok{font-size:26px;font-weight:800;background:#fff;border:2.5px solid var(--line);border-radius:10px;
+  padding:3px 10px;cursor:pointer;font-family:inherit;color:var(--main-d)}
+input[type=text]{border:2.5px solid var(--line);border-radius:10px;padding:9px 11px;font-size:16px;
+  font-family:inherit;width:210px}
+textarea{border:2.5px solid var(--line);border-radius:10px;padding:9px 11px;font-size:15px;
+  font-family:inherit;width:100%;min-height:50px;resize:vertical}
+.hz{font-size:26px;font-weight:800;color:var(--main-d);letter-spacing:2px}
+.passage{background:#f8f9ff;border:3px solid var(--line);border-radius:14px;padding:16px}
+.passage .line{font-size:27px;font-weight:800;color:var(--main-d);letter-spacing:3px;margin:8px 0;line-height:1.7}
+.matchwrap{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:620px){.matchwrap{grid-template-columns:1fr}}
+.mcol{display:flex;flex-direction:column;gap:9px}
+.mcard{border:3px solid var(--line);border-radius:12px;background:#fff;padding:10px;text-align:center;
+  cursor:pointer;font-size:40px;user-select:none}
+.mcard.num{font-size:32px;font-weight:800;color:var(--main-d)}
+.mcard.pick{border-color:var(--gold);background:#fffaf0}
+.mcard.done{border-color:var(--green);background:#e6f7ef;cursor:default;opacity:.75}
+.mark{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:8px;
+  background:#fffaf0;border:2px dashed var(--gold);border-radius:10px;padding:8px}
+.mark .lbl{font-size:12.5px;font-weight:800;color:#8a6a1e}
+.mbtn{border:2px solid var(--gold);background:#fff;color:#8a6a1e;border-radius:8px;padding:5px 12px;
+  font-weight:800;cursor:pointer;font-size:14px;font-family:inherit}
+.mbtn.on{background:var(--gold);color:#fff}
+.key{display:none;background:#eef7f0;border-left:4px solid var(--green);border-radius:8px;padding:8px 10px;
+  margin-top:8px;font-size:14px}
+body.showkey .key{display:block}
+.imgslot{display:inline-block;text-align:center;vertical-align:middle}
+.imgslot img{width:150px;height:150px;object-fit:contain;border-radius:12px;border:2px solid var(--line);
+  background:#fff;display:none}
+.imgslot img.ok{display:block}
+.imgslot.sm img{width:96px;height:96px}
+.imgslot .ph{font-size:58px;line-height:1.15}
+.imgslot.sm .ph{font-size:40px}
+.imgslot .fn{display:none;font-size:10.5px;color:var(--muted);margin-top:2px}
+body.showkey .imgslot .fn{display:block}
+.imglist{display:none}
+body.showkey .imglist{display:block}
+.vtable{border-collapse:collapse;width:100%;font-size:13.5px}
+.vtable th,.vtable td{border:1px solid var(--line);padding:6px 8px;text-align:left}
+.vtable th{background:var(--soft);color:var(--main-d)}
+table.res{border-collapse:collapse;width:100%;font-size:14px;margin-top:10px}
+table.res th,table.res td{border:1px solid var(--line);padding:8px;text-align:center}
+table.res th{background:var(--soft);color:var(--main-d)}
+.big-res{font-size:42px;font-weight:800;color:var(--main-d);text-align:center}
+.submitbox{margin-top:12px;background:#f4fbf7;border:2px dashed var(--green);border-radius:12px;padding:10px 12px}
+footer{text-align:center;padding:18px;color:var(--muted);font-size:12.5px}
+@media print{.noprint,.sound{display:none!important}body{background:#fff}
+ .card{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}.scorebar{position:static}}
+</style>
+</head>
+<body>
+<header>
+  <h1>BÀI KIỂM TRA · NGHE – ĐỌC – VIẾT – DỊCH</h1>
+  <p>Sách 1a &amp; 1b · Thang điểm 80 (quy đổi 10) · Không có phiên âm ở phần Đọc và Viết</p>
+</header>
+
+<div class="wrap">
+  <div class="card noprint">
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <span class="hint">Họ tên:</span><input type="text" id="stName" placeholder="Nguyễn Văn A">
+      <span class="hint">Lớp:</span><input type="text" id="stClass" style="width:110px" placeholder="Mầm 1">
+      <span class="hint">Ngày:</span><input type="text" id="stDate" style="width:130px" placeholder="11/09/2026">
+    </div>
+    <div class="hint" style="margin-top:8px">Phần có nhãn <span class="tag">Máy chấm</span> tự cộng điểm ngay.
+      Phần <span class="tag hand">Cô chấm</span> cô bấm điểm ở khung vàng.
+      <b>Bài đọc 1 và 2 chứa sẵn mọi mẫu câu của phần Viết – Dịch</b>, học sinh có thể quay lại xem.</div>
+  </div>
+
+  <div class="scorebar">
+    <span>Máy chấm: <b><span id="scAuto">0</span>/60</b></span>
+    <span>Cô chấm: <b><span id="scHand">0</span>/20</b></span>
+    <span>Tổng: <b><span id="scAll">0</span>/80</b></span>
+    <span>Thang 10: <b><span id="sc10">0</span></b></span>
+    <button class="btn ghost noprint" id="btnKey">🔒 Chế độ cô</button>
+    <button class="btn ghost noprint" id="btnPrint">🖨️ In / PDF</button>
+  </div>
+
+  <!-- DANH SÁCH ẢNH (chỉ cô xem) -->
+  <div class="card imglist">
+    <div class="sechead"><h2>🖼️ DANH SÁCH ẢNH CẦN CÓ</h2><span class="pt">chỉ hiện ở Chế độ cô</span></div>
+    <div class="hint">Tạo một thư mục tên <b>anh-kiem-tra</b> <u>cùng chỗ với file đề này</u>, rồi bỏ ảnh vào đó
+      với đúng tên dưới đây (đuôi <b>.jpg</b> hoặc <b>.png</b> đều được). Ảnh nào chưa có thì đề vẫn chạy bình thường,
+      chỗ đó tạm hiện hình vẽ emoji.</div>
+    <table class="vtable" id="imgTable"></table>
+  </div>
+
+  <!-- I. NGHE 1 -->
+  <div class="card">
+    <div class="sechead"><h2>I.1. NGHE – ĐÚNG hay SAI?</h2><span class="tag">Máy chấm</span><span class="pt">5 câu × 2đ = 10đ</span></div>
+    <div class="hint">Nhìn tranh, bấm 🔊 nghe câu. Câu nói có <b>khớp với tranh</b> không?</div>
+    <div id="secL1"></div>
+  </div>
+
+  <!-- I. NGHE 2 -->
+  <div class="card">
+    <div class="sechead"><h2>I.2. NGHE – NÔNG TRẠI CÓ BAO NHIÊU CON?</h2><span class="tag">Máy chấm</span><span class="pt">5 cặp × 2đ = 10đ</span></div>
+    <div class="hint">Bấm 🔊 nghe đoạn kể về nông trại (nghe 2–3 lần). Sau đó <b>bấm một con vật rồi bấm số lượng</b> tương ứng.</div>
+    <div style="text-align:center;margin:10px 0">
+      <button class="btn big" id="farmPlay">🔊 Nghe đoạn</button>
+      <button class="btn ghost" id="farmSlow">🐢 Nghe chậm</button>
+    </div>
+    <div class="matchwrap">
+      <div class="mcol" id="farmA"></div>
+      <div class="mcol" id="farmB"></div>
+    </div>
+    <div class="fb" id="farmFb"></div>
+    <div class="key" id="farmKey"></div>
+  </div>
+
+  <!-- II. ĐỌC 1 -->
+  <div class="card">
+    <div class="sechead"><h2>II.1. BÀI ĐỌC 1</h2><span class="tag">Máy chấm</span><span class="pt">5 câu × 2đ = 10đ</span></div>
+    <div class="passage" id="read1"></div>
+    <div id="secR1" style="margin-top:12px"></div>
+  </div>
+
+  <!-- II. ĐỌC 2 -->
+  <div class="card">
+    <div class="sechead"><h2>II.2. BÀI ĐỌC 2</h2><span class="tag">Máy chấm</span><span class="pt">5 câu × 2đ = 10đ</span></div>
+    <div class="passage" id="read2"></div>
+    <div id="secR2" style="margin-top:12px"></div>
+  </div>
+
+  <!-- III. VIẾT 1 -->
+  <div class="card">
+    <div class="sechead"><h2>III.1. GHÉP CÂU</h2><span class="tag">Máy chấm</span><span class="pt">5 câu × 2đ = 10đ</span></div>
+    <div class="hint">Bấm các chữ theo đúng thứ tự để tạo thành câu.</div>
+    <div id="secW1"></div>
+  </div>
+
+  <!-- III. VIẾT 2 -->
+  <div class="card">
+    <div class="sechead"><h2>III.2. CHỌN TỪ ĐIỀN VÀO CHỖ TRỐNG</h2><span class="tag">Máy chấm</span><span class="pt">5 câu × 2đ = 10đ</span></div>
+    <div id="secW2"></div>
+  </div>
+
+  <!-- IV. DỊCH -->
+  <div class="card">
+    <div class="sechead"><h2>IV. DỊCH</h2><span class="tag hand">Cô chấm</span><span class="pt">10 câu × 2đ = 20đ</span></div>
+    <div id="secT"></div>
+  </div>
+
+  <!-- KẾT QUẢ -->
+  <div class="card">
+    <div class="sechead"><h2>KẾT QUẢ</h2></div>
+    <table class="res" id="resTable"></table>
+    <div class="big-res" id="resBig">—</div>
+    <div style="text-align:center" class="hint" id="resNote"></div>
+    <div style="margin-top:12px"><div class="hint">Nhận xét của cô:</div>
+      <textarea id="teacherNote" placeholder="Ví dụ: nghe tốt, cần luyện thêm dịch Việt–Trung…"></textarea></div>
+    <div style="text-align:center;margin-top:12px" class="noprint">
+      <button class="btn big" id="btnCalc">📊 Tổng kết điểm</button>
+      <button class="btn big" id="btnSubmit" style="background:#1f9d63">📤 NỘP BÀI</button>
+    </div>
+    <div class="submitbox noprint" id="submitBox">
+      <div class="hint">Bấm <b>NỘP BÀI</b> sẽ: ① tải file kết quả về máy học sinh và
+        ② gửi bản kết quả về email của cô <b>dinhngan1104@gmail.com</b>.</div>
+      <div class="fb" id="submitFb"></div>
+    </div>
+  </div>
+
+  <footer>Tiếng Trung Hà Nam Ninh · Đề kiểm tra tổng hợp sách 1a &amp; 1b</footer>
+</div>
+
+<script>
+/* ================= NỀN ================= */
+let zhVoice=null;
+function pickVoice(){const vs=speechSynthesis.getVoices();
+ zhVoice=vs.find(v=>/zh[-_]CN/i.test(v.lang))||vs.find(v=>/zh/i.test(v.lang))||null;}
+pickVoice(); if(speechSynthesis.onvoiceschanged!==undefined) speechSynthesis.onvoiceschanged=pickVoice;
+function speak(t,r){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';u.rate=(r||0.7);if(zhVoice)u.voice=zhVoice;
+ speechSynthesis.speak(u);}
+const rnd=n=>Math.random()*n|0;
+function shuffleArr(a){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=rnd(i+1);const t=b[i];b[i]=b[j];b[j]=t;}return b;}
+let autoScore=0,handScore=0;
+function refresh(){
+ document.getElementById('scAuto').textContent=autoScore;
+ document.getElementById('scHand').textContent=handScore;
+ const all=autoScore+handScore;
+ document.getElementById('scAll').textContent=all;
+ document.getElementById('sc10').textContent=(all/8).toFixed(1);}
+function addAuto(n){autoScore+=n;refresh();}
+
+/* ===== MÃ MỞ KHOÁ CHẾ ĐỘ CÔ — cô muốn đổi thì sửa dãy số trong dấu nháy dưới đây ===== */
+const TEACHER_PIN='1104';
+
+/* ===== ẢNH: đặt trong thư mục "anh-kiem-tra" cạnh file này ===== */
+function imgHTML(file,emoji,small){
+ return '<div class="imgslot'+(small?' sm':'')+'"><img data-f="'+file+'" src="anh-kiem-tra/'+file+
+  '.jpg" alt="" onload="imgOk(this)" onerror="imgErr(this)"><div class="ph">'+emoji+'</div>'+
+  '<div class="fn">'+file+'.jpg</div></div>';}
+function imgOk(im){im.classList.add('ok');const p=im.parentElement.querySelector('.ph');if(p)p.style.display='none';}
+function imgErr(im){if(im.dataset.tr!=='png'){im.dataset.tr='png';im.src='anh-kiem-tra/'+im.dataset.f+'.png';}}
+const IMGLIST=[
+ ['nghe1-1-bo','Nghe I.1 câu 1','Ảnh người BỐ (một mình)'],
+ ['nghe1-2-banh-5-tuoi','Nghe I.1 câu 2','Bánh sinh nhật cắm 5 cây nến'],
+ ['nghe1-3-lop-1','Nghe I.1 câu 3','Bé bước vào lớp, có biển “lớp 1”'],
+ ['nghe1-4-gia-dinh-5-nguoi','Nghe I.1 câu 4','Gia đình đúng 5 người'],
+ ['nghe1-5-an-dau-tay','Nghe I.1 câu 5','Bé đang ăn dâu tây, vẻ mặt ngon miệng'],
+ ['nghe2-cho','Nghe I.2','Con chó'],
+ ['nghe2-meo','Nghe I.2','Con mèo'],
+ ['nghe2-cuu','Nghe I.2','Con cừu'],
+ ['nghe2-bo','Nghe I.2','Con bò'],
+ ['nghe2-ga','Nghe I.2','Con gà']
+];
+(function(){document.getElementById('imgTable').innerHTML=
+ '<tr><th>Tên file</th><th>Dùng ở</th><th>Nội dung ảnh</th></tr>'+
+ IMGLIST.map(v=>'<tr><td><b>'+v[0]+'.jpg</b></td><td>'+v[1]+'</td><td>'+v[2]+'</td></tr>').join('');})();
+
+/* ================= (đã bỏ ngân hàng từ vựng) ================= */
+const VOCAB_UNUSED=[
+ ['叫','jiào','tên là','Đọc 1, Đọc 2, Ghép câu, Điền từ, Dịch'],
+ ['名字','míngzi','tên','Đọc 1 (câu hỏi), Đọc 2 (câu hỏi)'],
+ ['岁','suì','tuổi','Nghe 1, Đọc 1, Đọc 2, Điền từ, Dịch'],
+ ['几','jǐ','mấy','Đọc 1, Đọc 2 (câu hỏi)'],
+ ['上','shàng','học (lớp)','Nghe 1, Đọc 1, Ghép câu, Dịch'],
+ ['年级','niánjí','lớp (khối)','Nghe 1, Đọc 1, Ghép câu, Dịch'],
+ ['家','jiā','nhà, gia đình','Nghe 1, Đọc 1, Ghép câu, Dịch'],
+ ['有','yǒu','có','Nghe 1, Đọc 1, Đọc 2, Ghép câu, Điền từ'],
+ ['口','kǒu','(lượng từ người)','Nghe 1, Đọc 1, Ghép câu, Điền từ'],
+ ['人','rén','người','Nghe 1, Đọc 1, Đọc 2, Ghép câu, Điền từ'],
+ ['爸爸','bàba','bố','Nghe 1, Đọc 1, Dịch'],
+ ['妈妈','māma','mẹ','Nghe 1, Đọc 1'],
+ ['哥哥','gēge','anh trai','Đọc 1'],
+ ['妹妹','mèimei','em gái','Đọc 1'],
+ ['喜欢','xǐhuan','thích','Nghe 1, Đọc 2, Ghép câu, Điền từ, Dịch'],
+ ['不','bù','không','Đọc 2, Ghép câu, Dịch'],
+ ['吃','chī','ăn','Nghe 1, Đọc 2, Ghép câu, Điền từ, Dịch'],
+ ['苹果','píngguǒ','quả táo','Đọc 2, Ghép câu, Dịch'],
+ ['草莓','cǎoméi','dâu tây','Nghe 1, Đọc 2'],
+ ['香蕉','xiāngjiāo','chuối','Đọc 2, Dịch'],
+ ['红色','hóngsè','màu đỏ','Đọc 2, Dịch'],
+ ['蓝色','lánsè','màu xanh lam','Đọc 2'],
+ ['绿色','lǜsè','màu xanh lá','Đọc 2, Ghép câu, Dịch'],
+ ['黄色','huángsè','màu vàng','Đọc 2'],
+ ['猫','māo','mèo','Nghe 2, Đọc 2, Điền từ, Dịch'],
+ ['狗','gǒu','chó','Nghe 2'],
+ ['羊','yáng','cừu','Nghe 2'],
+ ['牛','niú','bò','Nghe 2'],
+ ['鸡','jī','gà','Nghe 2'],
+ ['只','zhī','(lượng từ con vật)','Nghe 2, Đọc 2, Điền từ'],
+ ['头','tóu','(lượng từ con bò)','Nghe 2'],
+ ['中国','Zhōngguó','Trung Quốc','Đọc 2'],
+ ['是','shì','là','Đọc 2, Dịch'],
+ ['的','de','(sở hữu)','Đọc 2'],
+ ['一 ~ 二十','yī ~ èrshí','số 1–20','Nghe 1, Nghe 2, Đọc 1, Đọc 2, Điền từ, Dịch'],
+ ['两','liǎng','hai (đi với lượng từ)','Nghe 2'],
+ ['四十 / 三十八 / 十二','','số lớn hơn 20','Đọc 1, Dịch']
+];
+/* ================= I.1 NGHE ĐÚNG/SAI ================= */
+const L1=[
+ {img:'nghe1-1-bo',pic:'👨',say:'这是我妈妈。',ans:false,why:'Tranh là BỐ (爸爸) nhưng câu nói là MẸ (妈妈).'},
+ {img:'nghe1-2-banh-5-tuoi',pic:'🎂5️⃣',say:'我五岁。',ans:true,why:'Bánh sinh nhật 5 tuổi — khớp với 我五岁。'},
+ {img:'nghe1-3-lop-1',pic:'🏫1️⃣',say:'我上二年级。',ans:false,why:'Tranh là lớp 1 (一年级) nhưng câu nói là lớp 2 (二年级).'},
+ {img:'nghe1-4-gia-dinh-5-nguoi',pic:'👨‍👩‍👧‍👦👵',say:'我家有六口人。',ans:false,why:'Tranh có 5 người (五口人) nhưng câu nói là 6 người (六口人).'},
+ {img:'nghe1-5-an-dau-tay',pic:'🍓😋',say:'我喜欢吃草莓。',ans:true,why:'Tranh ăn dâu tây ngon miệng — khớp với 我喜欢吃草莓。'}
+];
+(function(){const box=document.getElementById('secL1');let done={};
+ L1.forEach((q,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="picrow">'+imgHTML(q.img,q.pic)+
+   '<div style="flex:1;min-width:220px"><div class="stem">Câu '+(i+1)+'. '+
+   '<button class="sound" data-z="'+q.say+'">🔊 Nghe</button></div>'+
+   '<div class="opts"><button class="opt tf" data-i="'+i+'" data-v="1">✅ ĐÚNG</button>'+
+   '<button class="opt tf" data-i="'+i+'" data-v="0">❌ SAI</button></div>'+
+   '<div class="fb" id="l1fb'+i+'"></div>'+
+   '<div class="key">Câu nghe: <b>'+q.say+'</b> → '+(q.ans?'ĐÚNG':'SAI')+'. '+q.why+'</div></div></div>';
+  box.appendChild(d);});
+ box.addEventListener('click',e=>{
+  const s=e.target.closest('.sound');if(s){speak(s.dataset.z);return;}
+  const b=e.target.closest('.opt');if(!b)return;
+  const i=+b.dataset.i,v=b.dataset.v==='1',q=L1[i];if(done[i])return;done[i]=1;
+  const fb=document.getElementById('l1fb'+i);
+  if(v===q.ans){b.classList.add('correct');fb.textContent='✓ Đúng (+2)';fb.className='fb ok';addAuto(2);}
+  else{b.classList.add('wrong');fb.textContent='✗ Sai';fb.className='fb no';}});
+})();
+
+/* ================= I.2 NÔNG TRẠI ================= */
+const FARM=[
+ {emo:'🐕',img:'nghe2-cho',hz:'狗',num:'三',n:3},
+ {emo:'🐈',img:'nghe2-meo',hz:'猫',num:'五',n:5},
+ {emo:'🐑',img:'nghe2-cuu',hz:'羊',num:'八',n:8},
+ {emo:'🐄',img:'nghe2-bo',hz:'牛',num:'两',n:2},
+ {emo:'🐔',img:'nghe2-ga',hz:'鸡',num:'十',n:10}
+];
+const FARMTEXT='我家有一个农场。农场里有三只狗，五只猫，八只羊，两头牛，十只鸡。';
+(function(){
+ const A=document.getElementById('farmA'),B=document.getElementById('farmB'),
+       fb=document.getElementById('farmFb');
+ let sel=null,found=0;
+ shuffleArr(FARM).forEach(f=>{const d=document.createElement('div');d.className='mcard';
+  d.innerHTML=imgHTML(f.img,f.emo,true);d.dataset.k=f.hz;
+  d.onclick=()=>{if(d.classList.contains('done'))return;
+   A.querySelectorAll('.mcard').forEach(x=>x.classList.remove('pick'));
+   d.classList.add('pick');sel=d;fb.textContent='Giờ bấm số lượng bên phải.';fb.className='fb';};
+  A.appendChild(d);});
+ shuffleArr(FARM).forEach(f=>{const d=document.createElement('div');d.className='mcard num';
+  d.textContent=f.num;d.dataset.k=f.hz;
+  d.onclick=()=>{if(d.classList.contains('done'))return;
+   if(!sel){fb.textContent='Bấm một con vật bên trái trước nhé.';fb.className='fb no';return;}
+   if(sel.dataset.k===f.hz){sel.classList.remove('pick');sel.classList.add('done');d.classList.add('done');
+    sel=null;found++;addAuto(2);
+    fb.innerHTML='✓ Đúng (+2) — '+found+'/5 cặp';fb.className='fb ok';
+    if(found===5)fb.innerHTML='🎉 Nối đúng cả 5 cặp!';}
+   else{fb.textContent='✗ Chưa khớp, nghe lại rồi thử lại.';fb.className='fb no';}};
+  B.appendChild(d);});
+ document.getElementById('farmPlay').onclick=()=>speak(FARMTEXT,0.68);
+ document.getElementById('farmSlow').onclick=()=>speak(FARMTEXT,0.5);
+ document.getElementById('farmKey').innerHTML='Đoạn nghe: <b>'+FARMTEXT+'</b><br>'+
+  '三只狗 (3 chó) · 五只猫 (5 mèo) · 八只羊 (8 cừu) · 两头牛 (2 bò) · 十只鸡 (10 gà)<br>'+
+  '<span class="hint">Lưu ý cho cô: con bò dùng lượng từ 头, số 2 đi với lượng từ đọc là 两 chứ không phải 二.</span>';
+})();
+
+/* ================= II.1 BÀI ĐỌC 1 ================= */
+const READ1=['你好！我叫王小明。','我八岁，我上二年级。','我家有五口人：爸爸、妈妈、哥哥、妹妹和我。',
+ '爸爸四十岁，妈妈三十八岁。','哥哥十二岁，妹妹三岁。'];
+const R1Q=[
+ {q:'他叫什么名字？',opts:['王小明','李红','小华'],ans:0},
+ {q:'他几岁？',opts:['五岁','八岁','十二岁'],ans:1},
+ {q:'他上几年级？',opts:['一年级','二年级','三年级'],ans:1},
+ {q:'他家有几口人？',opts:['四口人','五口人','六口人'],ans:1},
+ {q:'妹妹几岁？',opts:['三岁','八岁','十二岁'],ans:0}
+];
+/* ================= II.2 BÀI ĐỌC 2 ================= */
+const READ2=['我叫李红，我七岁。我是中国人。','我喜欢红色，也喜欢蓝色。我不喜欢绿色。',
+ '我喜欢吃苹果和草莓。我不喜欢吃香蕉。','我有一只猫，我的猫是黄色的。'];
+const R2Q=[
+ {q:'她叫什么名字？',opts:['王小明','李红','小红'],ans:1},
+ {q:'她是哪国人？',opts:['中国人','越南人','美国人'],ans:0},
+ {q:'她不喜欢什么颜色？',opts:['红色','蓝色','绿色'],ans:2},
+ {q:'她不喜欢吃什么？',opts:['苹果','草莓','香蕉'],ans:2},
+ {q:'她的猫是什么颜色的？',opts:['黄色','红色','蓝色'],ans:0}
+];
+function renderRead(lines,boxId,qs,qBoxId,tag){
+ document.getElementById(boxId).innerHTML=lines.map(l=>'<div class="line">'+l+'</div>').join('');
+ const box=document.getElementById(qBoxId);let done={};
+ qs.forEach((q,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="stem">Câu '+tag+(i+1)+'. <span class="hz">'+q.q+'</span></div>'+
+   '<div class="opts">'+q.opts.map((o,oi)=>'<button class="opt small" data-i="'+i+'" data-o="'+oi+'">'+o+'</button>').join('')+
+   '</div><div class="fb" id="'+qBoxId+'fb'+i+'"></div>'+
+   '<div class="key">Đáp án: <b>'+q.opts[q.ans]+'</b></div>';
+  box.appendChild(d);});
+ box.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;
+  const i=+b.dataset.i,o=+b.dataset.o,q=qs[i];if(done[i])return;done[i]=1;
+  const fb=document.getElementById(qBoxId+'fb'+i);
+  if(o===q.ans){b.classList.add('correct');fb.textContent='✓ Đúng (+2)';fb.className='fb ok';addAuto(2);}
+  else{b.classList.add('wrong');[...b.parentElement.querySelectorAll('.opt')][q.ans].classList.add('correct');
+   fb.textContent='✗ Sai';fb.className='fb no';}});
+}
+renderRead(READ1,'read1',R1Q,'secR1','A');
+renderRead(READ2,'read2',R2Q,'secR2','B');
+
+/* ================= III.1 GHÉP CÂU ================= */
+const W1=[
+ {toks:['我','叫','王','小','明'],ans:'我叫王小明',vi:'Mình tên là Vương Tiểu Minh.'},
+ {toks:['我','上','二','年','级'],ans:'我上二年级',vi:'Mình học lớp 2.'},
+ {toks:['我','家','有','五','口','人'],ans:'我家有五口人',vi:'Nhà mình có 5 người.'},
+ {toks:['我','喜','欢','吃','苹','果'],ans:'我喜欢吃苹果',vi:'Mình thích ăn táo.'},
+ {toks:['我','不','喜','欢','绿','色'],ans:'我不喜欢绿色',vi:'Mình không thích màu xanh lá.'}
+];
+(function(){const box=document.getElementById('secW1');const scored={};
+ function bind(btn,i){btn.onclick=()=>{box.querySelector('[data-ans="'+i+'"]').appendChild(btn);
+   btn.onclick=()=>{box.querySelector('[data-bank="'+i+'"]').appendChild(btn);bind(btn,i);};};}
+ function fill(i,items){const bank=box.querySelector('[data-bank="'+i+'"]');bank.innerHTML='';
+   items.forEach(t=>{const b=document.createElement('button');b.className='tok';b.textContent=t;bind(b,i);bank.appendChild(b);});}
+ W1.forEach((o,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="stem">Câu '+(i+1)+'. “'+o.vi+'”</div>'+
+   '<div class="answerbox" data-ans="'+i+'"></div><div class="bank" data-bank="'+i+'"></div>'+
+   '<div style="margin-top:8px"><button class="btn" data-ck="'+i+'">Kiểm tra</button> '+
+   '<button class="btn ghost" data-rs="'+i+'">Làm lại</button></div>'+
+   '<div class="fb" id="w1fb'+i+'"></div><div class="key">Đáp án: <b>'+o.ans+'</b></div>';
+  box.appendChild(d);fill(i,shuffleArr(o.toks));});
+ box.addEventListener('click',e=>{
+  const ck=e.target.closest('[data-ck]');
+  if(ck){const i=+ck.dataset.ck,o=W1[i],fb=document.getElementById('w1fb'+i);
+   const got=[...box.querySelector('[data-ans="'+i+'"]').querySelectorAll('.tok')].map(x=>x.textContent).join('');
+   if(got===o.ans){if(!scored[i]){scored[i]=1;addAuto(2);}
+    fb.textContent='✓ Đúng (+2)';fb.className='fb ok';speak(o.ans);}
+   else{fb.textContent='✗ Chưa đúng';fb.className='fb no';}return;}
+  const rs=e.target.closest('[data-rs]');
+  if(rs){const i=+rs.dataset.rs;if(scored[i])return;
+   box.querySelector('[data-ans="'+i+'"]').innerHTML='';
+   fill(i,shuffleArr(W1[i].toks));document.getElementById('w1fb'+i).textContent='';}});
+})();
+
+/* ================= III.2 ĐIỀN TỪ ================= */
+const W2=[
+ {pre:'我',post:'王小明。',opts:['叫','岁','有'],ans:0,vi:'Mình tên là Vương Tiểu Minh.'},
+ {pre:'我八',post:'。',opts:['人','岁','口'],ans:1,vi:'Mình 8 tuổi.'},
+ {pre:'我家有五口',post:'。',opts:['人','只','岁'],ans:0,vi:'Nhà mình có 5 người.'},
+ {pre:'我',post:'吃草莓。',opts:['不','喜欢','有'],ans:1,vi:'Mình thích ăn dâu tây.'},
+ {pre:'我有一',post:'猫。',opts:['口','个','只'],ans:2,vi:'Mình có một con mèo.'}
+];
+(function(){const box=document.getElementById('secW2');let done={};
+ W2.forEach((q,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="stem">Câu '+(i+1)+'. <span class="hz">'+q.pre+
+   ' <span style="color:#dc3b3b">____</span> '+q.post+'</span> <span class="hint">('+q.vi+')</span></div>'+
+   '<div class="opts">'+q.opts.map((o,oi)=>'<button class="opt" data-i="'+i+'" data-o="'+oi+'">'+o+'</button>').join('')+
+   '</div><div class="fb" id="w2fb'+i+'"></div>'+
+   '<div class="key">Đáp án: <b>'+q.opts[q.ans]+'</b> → '+q.pre+q.opts[q.ans]+q.post+'</div>';
+  box.appendChild(d);});
+ box.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;
+  const i=+b.dataset.i,o=+b.dataset.o,q=W2[i];if(done[i])return;done[i]=1;
+  const fb=document.getElementById('w2fb'+i);
+  if(o===q.ans){b.classList.add('correct');fb.textContent='✓ Đúng (+2)';fb.className='fb ok';addAuto(2);
+   speak(q.pre+q.opts[q.ans]+q.post);}
+  else{b.classList.add('wrong');[...b.parentElement.querySelectorAll('.opt')][q.ans].classList.add('correct');
+   fb.textContent='✗ Sai';fb.className='fb no';}});
+})();
+
+/* ================= IV. DỊCH (cô chấm) ================= */
+const T1=[
+ {zh:'我叫李红。',key:'Mình tên là Lý Hồng.'},
+ {zh:'我上二年级。',key:'Mình học lớp 2.'},
+ {zh:'我家有五口人。',key:'Nhà mình có 5 người.'},
+ {zh:'我不喜欢吃香蕉。',key:'Mình không thích ăn chuối.'},
+ {zh:'我的猫是黄色的。',key:'Con mèo của mình màu vàng.'}
+];
+const T2=[
+ {vi:'Mình 7 tuổi.',key:'我七岁。'},
+ {vi:'Mình thích màu đỏ.',key:'我喜欢红色。'},
+ {vi:'Bố mình 40 tuổi.',key:'爸爸四十岁。'},
+ {vi:'Mình thích ăn táo.',key:'我喜欢吃苹果。'},
+ {vi:'Mình có một con mèo.',key:'我有一只猫。'}
+];
+const handItems=[];
+function markRow(id,keyText){
+ handItems.push({id:id,val:null});
+ return '<div class="mark noprint"><span class="lbl">Cô chấm:</span>'+
+  [0,1,2].map(s=>'<button class="mbtn" data-h="'+id+'" data-v="'+s+'">'+s+'đ</button>').join('')+
+  '<span class="lbl" id="mk'+id+'">chưa chấm</span></div>'+
+  '<div class="key">Đáp án: <b>'+keyText+'</b></div>';
+}
+(function(){const box=document.getElementById('secT');
+ const h1=document.createElement('div');
+ h1.innerHTML='<div class="hint" style="font-weight:800">IV.1. Dịch sang tiếng Việt (5 câu × 2đ)</div>';
+ box.appendChild(h1);
+ T1.forEach((q,i)=>{const id='t1_'+i;const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="stem">Câu '+(i+1)+'. <span class="hz">'+q.zh+'</span></div>'+
+   '<textarea placeholder="Dịch sang tiếng Việt…"></textarea>'+markRow(id,q.key);
+  box.appendChild(d);});
+ const h2=document.createElement('div');
+ h2.innerHTML='<div class="hint" style="font-weight:800;margin-top:14px">IV.2. Dịch sang tiếng Trung — viết chữ Hán (5 câu × 2đ)</div>';
+ box.appendChild(h2);
+ T2.forEach((q,i)=>{const id='t2_'+i;const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="stem">Câu '+(i+6)+'. <b>'+q.vi+'</b></div>'+
+   '<textarea placeholder="Viết tiếng Trung…"></textarea>'+markRow(id,q.key);
+  box.appendChild(d);});
+ document.addEventListener('click',e=>{
+  const s=e.target.closest('.sound');if(s&&s.dataset.z){speak(s.dataset.z);return;}
+  const b=e.target.closest('.mbtn');if(!b)return;
+  const id=b.dataset.h,v=parseFloat(b.dataset.v);
+  const it=handItems.filter(x=>x.id===id)[0];
+  b.parentElement.querySelectorAll('.mbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');it.val=v;
+  document.getElementById('mk'+id).textContent=v+' điểm';
+  handScore=handItems.reduce((s,x)=>s+(x.val||0),0);refresh();});
+})();
+
+/* ================= NÚT ================= */
+document.getElementById('btnKey').onclick=()=>{
+ const on=document.body.classList.contains('showkey');
+ if(!on){
+  const p=prompt('Nhập mã của cô để xem đáp án:');
+  if(p===null)return;
+  if(p.trim()!==TEACHER_PIN){alert('Mã không đúng.');return;}
+ }
+ document.body.classList.toggle('showkey');
+ document.getElementById('btnKey').textContent=document.body.classList.contains('showkey')?'🙈 Thoát chế độ cô':'🔒 Chế độ cô';};
+document.getElementById('btnPrint').onclick=()=>window.print();
+document.getElementById('btnCalc').onclick=()=>{
+ const unmarked=handItems.filter(x=>x.val===null).length;
+ const all=autoScore+handScore,d10=all/8;
+ document.getElementById('resTable').innerHTML=
+  '<tr><th>Phần</th><th>Điểm</th><th>Tối đa</th></tr>'+
+  '<tr><td>I. Nghe (đúng/sai + nông trại)</td><td colspan="2">20</td></tr>'+
+  '<tr><td>II. Đọc hiểu (2 bài)</td><td colspan="2">20</td></tr>'+
+  '<tr><td>III. Viết (ghép câu + điền từ)</td><td colspan="2">20</td></tr>'+
+  '<tr><td><b>Tổng máy chấm</b></td><td><b>'+autoScore+'</b></td><td>60</td></tr>'+
+  '<tr><td>IV. Dịch (cô chấm)</td><td>'+handScore+'</td><td>20</td></tr>'+
+  '<tr><th>TỔNG</th><th>'+all+'</th><th>80</th></tr>';
+ document.getElementById('resBig').textContent=d10.toFixed(1)+' / 10';
+ document.getElementById('resNote').innerHTML=
+  (d10>=9?'🥇 Xuất sắc':d10>=7.5?'🥈 Giỏi':d10>=6?'🥉 Khá':d10>=5?'Đạt — cần ôn thêm':'Chưa đạt — ôn lại từ bài 1')+
+  (unmarked?' · <span style="color:#dc3b3b">Còn '+unmarked+' câu dịch cô chưa chấm</span>':'');
+ document.getElementById('resTable').scrollIntoView({behavior:'smooth'});};
+
+/* ================= NỘP BÀI & GỬI EMAIL ================= */
+const TEACHER_EMAIL='dinhngan1104@gmail.com';
+const TEST_TITLE='Kiểm tra NGHE – ĐỌC – VIẾT – DỊCH (sách 1a + 1b)';
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function collectFree(){
+ const out=[];
+ document.querySelectorAll('#secT .q').forEach((q,i)=>{
+  const stem=q.querySelector('.stem').textContent.trim();
+  const ta=q.querySelector('textarea');
+  const on=q.querySelector('.mbtn.on');
+  out.push({stem:stem,ans:ta?ta.value:'',score:on?on.dataset.v:'chưa chấm'});});
+ return out;
+}
+function buildReport(){
+ const nm=document.getElementById('stName').value||'(chưa điền tên)';
+ const cl=document.getElementById('stClass').value||'—';
+ const dt=document.getElementById('stDate').value||new Date().toLocaleDateString('vi-VN');
+ const all=autoScore+handScore,d10=(all/8).toFixed(1);
+ const free=collectFree();
+ let h='<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><title>Kết quả — '+esc(nm)+'</title>'+
+  '<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:760px;margin:20px auto;padding:0 14px;color:#232842}'+
+  'h1{font-size:20px;color:#2a3880}table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0}'+
+  'th,td{border:1px solid #c3caee;padding:7px;text-align:left}th{background:#e2e6f8}'+
+  '.big{font-size:30px;font-weight:800;color:#2a3880;text-align:center;margin:12px 0}'+
+  '.zh{font-size:19px;font-weight:700}</style></head><body>';
+ h+='<h1>'+TEST_TITLE+'</h1>';
+ h+='<table><tr><th>Học sinh</th><td>'+esc(nm)+'</td></tr>'+
+    '<tr><th>Lớp</th><td>'+esc(cl)+'</td></tr><tr><th>Ngày làm bài</th><td>'+esc(dt)+'</td></tr>'+
+    '<tr><th>Thời điểm nộp</th><td>'+new Date().toLocaleString('vi-VN')+'</td></tr></table>';
+ h+='<table><tr><th>Phần</th><th>Điểm</th><th>Tối đa</th></tr>'+
+    '<tr><td>Máy chấm (Nghe · Đọc · Viết)</td><td>'+autoScore+'</td><td>60</td></tr>'+
+    '<tr><td>Dịch (cô chấm)</td><td>'+handScore+'</td><td>20</td></tr>'+
+    '<tr><th>TỔNG</th><th>'+all+'</th><th>80</th></tr></table>';
+ h+='<div class="big">'+d10+' / 10</div>';
+ h+='<h1>Bài dịch của học sinh</h1><table><tr><th>Câu</th><th>Bài làm</th><th>Điểm cô</th></tr>';
+ free.forEach(f=>{h+='<tr><td class="zh">'+esc(f.stem)+'</td><td>'+esc(f.ans||'(bỏ trống)')+'</td><td>'+esc(f.score)+'</td></tr>';});
+ h+='</table>';
+ const note=document.getElementById('teacherNote').value;
+ if(note)h+='<h1>Nhận xét của cô</h1><p>'+esc(note)+'</p>';
+ h+='<p style="color:#6f7695;font-size:12px">Tiếng Trung Hà Nam Ninh · file kết quả tự sinh</p></body></html>';
+ let txt='HỌC SINH: '+nm+' | Lớp: '+cl+' | Ngày: '+dt+'\n'+
+  'Máy chấm: '+autoScore+'/60 · Cô chấm: '+handScore+'/20 · TỔNG: '+all+'/80 → '+d10+'/10\n\n--- BÀI DỊCH ---\n';
+ free.forEach(f=>{txt+=f.stem+'\n  → '+(f.ans||'(bỏ trống)')+'   ['+f.score+'đ]\n';});
+ if(note)txt+='\nNhận xét: '+note;
+ return {name:nm,cls:cl,date:dt,total:all,d10:d10,html:h,txt:txt};
+}
+function downloadFile(fn,content){
+ const b=new Blob([content],{type:'text/html;charset=utf-8'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=fn;
+ document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1500);}
+document.getElementById('btnSubmit').onclick=async ()=>{
+ const fb=document.getElementById('submitFb');
+ document.getElementById('btnCalc').click();
+ const r=buildReport();
+ const fn='KetQua_'+(r.name.replace(/[^\p{L}\p{N}]+/gu,'_'))+'_'+r.date.replace(/[^0-9]/g,'')+'.html';
+ downloadFile(fn,r.html);
+ fb.innerHTML='💾 Đã tải file kết quả về máy. Đang gửi về email cô…';fb.className='fb';
+ try{
+  const res=await fetch('https://formsubmit.co/ajax/'+TEACHER_EMAIL,{
+   method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+   body:JSON.stringify({_subject:'[Bài kiểm tra VIẾT] '+r.name+' — '+r.d10+'/10',
+    _template:'table','Học sinh':r.name,'Lớp':r.cls,'Ngày':r.date,
+    'Tổng điểm':r.total+'/80','Thang 10':r.d10,'Chi tiết':r.txt})});
+  const j=await res.json();
+  if(res.ok){fb.innerHTML='✅ Đã gửi kết quả về <b>'+TEACHER_EMAIL+'</b>. File kết quả cũng đã lưu trong thư mục Downloads.';
+   fb.className='fb ok';}
+  else throw new Error(j.message||'lỗi gửi');
+ }catch(e){
+  fb.innerHTML='⚠️ Không gửi tự động được (máy không có mạng hoặc dịch vụ bận). '+
+   'File kết quả <b>đã tải về máy</b> — bấm nút dưới để gửi bằng email cá nhân.'+
+   '<div style="margin-top:8px"><button class="btn" id="btnMail">✉️ Mở email gửi cô</button></div>';
+  fb.className='fb no';
+  document.getElementById('btnMail').onclick=()=>{
+   location.href='mailto:'+TEACHER_EMAIL+'?subject='+encodeURIComponent('[Bài kiểm tra VIẾT] '+r.name)+
+    '&body='+encodeURIComponent(r.txt+'\n\n(Đính kèm thêm file KetQua_... trong thư mục Downloads)');};
+ }};
+refresh();
+</script>
+</body>
+</html>
